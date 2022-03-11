@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { useTwitch } from '../../util/Authentication/Authentication';
+import { useBroadcast } from '../../util/TwitchHooks/useBroadcast';
+import { useAuthentication } from '../../util/TwitchHooks/useAuthentication';
+import { useTheme } from '../../util/TwitchHooks/useTheme';
 
 import './Config.css'
 
@@ -12,22 +14,17 @@ declare global {
 }
 
 const ConfigPage = () => {
-    const [theme, setTheme] = useState<"light" | "dark">("light");
-    const onBroadcast = (target: any,contentType: any,body: any)=>{
+    const theme = useTheme();
+    const { isLoading, isModerator } = useAuthentication();
+    useBroadcast((target: any,contentType: any,body: any)=>{
         window.Twitch.ext.rig.log(`New PubSub message!\n${target}\n${contentType}\n${body}`)
         // now that you've got a listener, do something with the result... 
 
         // do something...
 
-    };
-    const onContext = (context: any,delta: any)=>{
-        if(delta.includes('theme')){
-            setTheme(context.theme);
-        }
-    };
-    const { isLoading, isModerator } = useTwitch({ onBroadcast, onContext });
+    });
 
-    if(!isLoading && isModerator){
+    if (!isLoading && isModerator) {
         return(
             <div className="Config">
                 <div className={theme==='light' ? 'Config-light' : 'Config-dark'}>

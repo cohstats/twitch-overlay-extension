@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
-import { useTwitch } from '../../util/Authentication/Authentication'
+import { useTheme } from '../../util/TwitchHooks/useTheme';
+import { useAuthentication } from '../../util/TwitchHooks/useAuthentication';
 
 import './LiveConfigPage.css'
+import { useBroadcast } from '../../util/TwitchHooks/useBroadcast';
 
 const LiveConfigPage = () => {
-    const [theme, setTheme] = useState<"light" | "dark">("light");
-    const onBroadcast = (target: any,contentType: any,body: any)=>{
+    const theme = useTheme();
+    const { isLoading, isModerator } = useAuthentication();
+    useBroadcast((target: any,contentType: any,body: any)=>{
         window.Twitch.ext.rig.log(`New PubSub message!\n${target}\n${contentType}\n${body}`)
         // now that you've got a listener, do something with the result... 
 
         // do something...
 
-    };
-    const onContext = (context: any,delta: any)=>{
-        if(delta.includes('theme')){
-            setTheme(context.theme);
-        }
-    };
-    const { isLoading, isModerator } = useTwitch({ onBroadcast, onContext });
+    });
 
     if(!isLoading) {
         return (

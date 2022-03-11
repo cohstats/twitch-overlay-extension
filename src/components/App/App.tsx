@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useTwitch } from '../../util/Authentication/Authentication'
+import { useTheme } from '../../util/TwitchHooks/useTheme';
+import { useAuthentication } from '../../util/TwitchHooks/useAuthentication'
 
 import './App.css'
+import { useExtensionVisible } from '../../util/TwitchHooks/useExtensionVisible';
+import { useBroadcast } from '../../util/TwitchHooks/useBroadcast';
 
 declare global {
     interface Window {
@@ -12,24 +15,16 @@ declare global {
 }
 
 const App = () => {
-    const [theme, setTheme] = useState<"light" | "dark">("light");
-    const [visible, setVisible] = useState(true);
-    const onBroadcast = (target: any,contentType: any,body: any)=>{
+    const theme = useTheme();
+    const visible = useExtensionVisible();
+    const { isLoading, token, opaqueId, isModerator, hasSharedId, userId } = useAuthentication();
+    useBroadcast((target: any,contentType: any,body: any) => {
         window.Twitch.ext.rig.log(`New PubSub message!\n${target}\n${contentType}\n${body}`)
         // now that you've got a listener, do something with the result... 
 
         // do something...
 
-    };
-    const onVisibilityChanged = (isVisible: any,_c: any)=>{
-        setVisible(isVisible);
-    };
-    const onContext = (context: any,delta: any)=>{
-        if(delta.includes('theme')){
-            setTheme(context.theme);
-        }
-    };
-    const { isLoading, token, opaqueId, isModerator, hasSharedId, userId } = useTwitch({ onBroadcast, onVisibilityChanged, onContext });
+    });
 
     if(!isLoading && visible){
         return (
