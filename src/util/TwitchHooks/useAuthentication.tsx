@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 
-export function useTwitch(options?: { onBroadcast?: (target: any, contentType: any, body: any) => void, onVisibilityChanged?: (isVisible: any,_c: any) => void, onContext?: (context: any, delta: any) => void }) {
+export function useAuthentication() {
     const [token, setToken] = useState<undefined | string>(undefined);
     const [opaqueId, setOpaqueId] = useState<undefined | string>(undefined);
     const [userId, setUserId] = useState<undefined | string>(undefined);
@@ -34,16 +34,6 @@ export function useTwitch(options?: { onBroadcast?: (target: any, contentType: a
                 }
                 setLoading(false);
             });
-
-            window.Twitch.ext.listen('broadcast',options?.onBroadcast);
-
-            window.Twitch.ext.onVisibilityChanged(options?.onVisibilityChanged);
-
-            window.Twitch.ext.onContext(options?.onContext);
-
-            return () => {
-                window.Twitch.ext.unlisten('broadcast', ()=>console.log('successfully unlistened'));
-            };
         }
         return undefined;
     }, []);
