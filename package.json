@@ -1,0 +1,62 @@
+{
+  "name": "react-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development",
+    "cert": "./bin/generate_cert.sh server",
+    "host": "webpack-dev-server --mode development --devrig"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.0",
+    "clean-webpack-plugin": "^1.0.1",
+    "css-loader": "^3.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "isomorphic-fetch": "^3.0.0",
+    "jest": "^24.9.0",
+    "node-sass": "^4.13.0",
+    "regenerator-runtime": "^0.13.3",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "core-js": "^3.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test/jestsetup.js"
+    ],
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(scss|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|sccss|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
+}
