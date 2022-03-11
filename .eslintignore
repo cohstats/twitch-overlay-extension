@@ -1,0 +1,4 @@
+dist/
+babel.config.js
+prettier.config.js
+webpack.config.js
