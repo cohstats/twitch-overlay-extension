@@ -4,17 +4,11 @@ import { useAuthentication } from '../../util/TwitchHooks/useAuthentication';
 
 import './LiveConfigPage.css'
 import { useBroadcast } from '../../util/TwitchHooks/useBroadcast';
+import { useConfiguration } from '../../util/TwitchHooks/useConfiguration';
 
 const LiveConfigPage = () => {
     const theme = useTheme();
-    const { isLoading, isModerator } = useAuthentication();
-    useBroadcast((target: any,contentType: any,body: any)=>{
-        window.Twitch.ext.rig.log(`New PubSub message!\n${target}\n${contentType}\n${body}`)
-        // now that you've got a listener, do something with the result... 
-
-        // do something...
-
-    });
+    const { isLoading, config, setConfig, version } = useConfiguration(); // <- use this hook to set and get the configuration
 
     if(!isLoading) {
         return (
