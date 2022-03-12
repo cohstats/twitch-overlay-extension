@@ -12,8 +12,8 @@ const LiveConfigPage = () => {
     return (
       <div className="LiveConfigPage">
         <div className={theme === "light" ? "LiveConfigPage-light" : "LiveConfigPage-dark"}>
-            {config}
-            <button onClick={() => setConfig(version, config)}>Save</button>
+          {config}
+          <button onClick={() => setConfig(version, config)}>Save</button>
           <p>Hello world!</p>
           <p>This is the live config page! </p>
         </div>

@@ -58,6 +58,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "antd": "^4.19.1",
     "core-js": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "react": "^16.12.0",
