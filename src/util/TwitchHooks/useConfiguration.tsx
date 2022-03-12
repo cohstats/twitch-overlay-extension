@@ -25,7 +25,7 @@ export function useConfiguration(options?: {
 
   const updateVersion = () => {
     if (window.Twitch.ext.configuration.broadcaster) {
-        setVersion(window.Twitch.ext.configuration.broadcaster.version);
+      setVersion(window.Twitch.ext.configuration.broadcaster.version);
     }
   };
 
