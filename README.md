@@ -1,3 +1,13 @@
+# COH 2 Stats Twitch Extension
+
+### List of whitelisted domains:
+_This allowlist cannot be edited after submitting your Extension for review. In addition to this, if you intend to edit your allowlist, you must resubmit your Extension for review. Please make sure that your allowlist is accurate prior to submitting for review. For more information, please refer to our documentation._
+```
+https://firebaselogging-pa.googleapis.com, https://firestore.googleapis.com, https://firebase.googleapis.com
+```
+
+# DEFAULT INFO
+
 # Twitch Extension React Boilerplate
 
 - [Twitch Extension React Boilerplate](#twitch-extension-react-boilerplate)
