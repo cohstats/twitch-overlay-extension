@@ -3,7 +3,8 @@ import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import "./global.scss";
 import { events, firebaseInit } from "../firebase";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
-import { Button, Form, Input, Radio } from "antd";
+import { Form, Input } from "antd";
+import Search from "antd/lib/input/search";
 
 declare global {
   interface Window {
@@ -18,7 +19,7 @@ declare global {
 firebaseInit();
 
 const ConfigPage = () => {
-  const { isLoading, config, setConfig, version } = useConfiguration(); // <- use this hook to set and get the configuration
+  const { isLoading, config, version } = useConfiguration(); // <- use this hook to set and get the configuration
 
   // listen to the data from firestore
   useEffect(() => {
@@ -40,25 +41,8 @@ const ConfigPage = () => {
           <Form.Item label="UUID">
             <Input.Password />
           </Form.Item>
-          <Form.Item label="Link to my player card">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Developer Option Coh2 game state">
-            <Radio.Group>
-              <Radio.Button value="optional">closed</Radio.Button>
-              <Radio.Button value>menu</Radio.Button>
-              <Radio.Button value={false}>loading</Radio.Button>
-              <Radio.Button value={false}>ingame</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={() => setConfig(version, { gameState: "closed" })}
-            >
-              Save
-            </Button>
+          <Form.Item label="Link to your player card">
+            <Search placeholder="Search player name" enterButton/>
           </Form.Item>
         </Form>
         {config}
@@ -70,3 +54,26 @@ const ConfigPage = () => {
 };
 
 export default ConfigPage;
+
+/*
+          <Form.Item label="Developer Option Coh2 game state">
+            <Radio.Group>
+              <Radio.Button value="optional">closed</Radio.Button>
+              <Radio.Button value>menu</Radio.Button>
+              <Radio.Button value={false}>loading</Radio.Button>
+              <Radio.Button value={false}>ingame</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+*/
+
+/*
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={() => setConfig(version, { gameState: "closed" })}
+            >
+              Save
+            </Button>
+          </Form.Item>
+*/

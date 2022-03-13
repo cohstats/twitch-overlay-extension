@@ -1,11 +1,11 @@
 .ant-drawer-content {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 @supports (backdrop-filter: opacity(1)) {
   .ant-drawer-content {
     //background-color: transparent;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(5px);
   }
 }
@@ -28,4 +28,21 @@
 
 th {
   background-color: transparent !important;
+}
+
+.ant-drawer-body {
+  padding-bottom: 0;
+  padding-top: 16px;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #3030303d;
+}
+
+.ant-table-thead > tr > th {
+  border-bottom: 1px solid #3030303d;
+}
+
+.ant-table-cell-row-hover {
+  background-color: rgba(255, 255, 255, 0.288) !important;
 }

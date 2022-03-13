@@ -33,7 +33,7 @@ const PanelPage = () => {
   }, []);
 
   if (!isLoading && extensionVisible) {
-    return <>Hello World Panel</>;
+    return <>Maybe display player card or map stats?</>;
   } else {
     return <div className="App"></div>;
   }
