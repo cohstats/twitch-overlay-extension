@@ -42,7 +42,7 @@ const ConfigPage = () => {
             <Input.Password />
           </Form.Item>
           <Form.Item label="Link to your player card">
-            <Search placeholder="Search player name" enterButton/>
+            <Search placeholder="Search player name" enterButton />
           </Form.Item>
         </Form>
         {config}

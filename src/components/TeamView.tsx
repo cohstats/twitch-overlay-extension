@@ -134,7 +134,6 @@ const TeamView: React.FC<Props> = ({ side }) => {
         }
       },
     },
-
   ];
 
   return (

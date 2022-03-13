@@ -47,7 +47,8 @@ const VideoOverlayPage = () => {
     });
   }, []);
 
-  if (!isLoading && extensionVisible) { // !isLoading && extensionVisible
+  if (!isLoading && extensionVisible) {
+    // !isLoading && extensionVisible
     return (
       <>
         <img
@@ -60,19 +61,25 @@ const VideoOverlayPage = () => {
           alt=""
           style={{ position: "absolute", inset: 0, width: "100%", display: "none" }}
         />
-        {!drawerVisible ? <Button
-          style={{ position: "absolute", bottom: "2rem", left: "45%", right: "45%" }}
-          type="primary"
-          onClick={showDrawer}
-        >
-          Show Player Stats
-        </Button> : null}
+        {!drawerVisible ? (
+          <Button
+            style={{ position: "absolute", bottom: "2rem", left: "45%", right: "45%" }}
+            type="primary"
+            onClick={showDrawer}
+          >
+            Show Player Stats
+          </Button>
+        ) : null}
         <Drawer
           placement="bottom"
           visible={drawerVisible}
           onClose={onCloseDrawer}
           height={"22.1rem"}
-          contentWrapperStyle={{ paddingLeft: "4rem", paddingRight: "7rem", paddingBottom: "5rem"}}
+          contentWrapperStyle={{
+            paddingLeft: "4rem",
+            paddingRight: "7rem",
+            paddingBottom: "5rem",
+          }}
           headerStyle={{ background: "rgba(255, 255, 255, 0)" }}
           maskStyle={{ background: "transparent" }}
         >
@@ -80,14 +87,21 @@ const VideoOverlayPage = () => {
             <Col span={11}>
               <TeamView side={testData.left} />
             </Col>
-            <Col span={2} style={{display: "flex", justifyContent: "center", alignItems: "center", paddingTop: 22}}>
+            <Col
+              span={2}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingTop: 22,
+              }}
+            >
               <h1>VS</h1>
             </Col>
             <Col span={11}>
               <TeamView side={testData.right} />
             </Col>
           </Row>
-
         </Drawer>
       </>
     );
