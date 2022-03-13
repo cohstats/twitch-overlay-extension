@@ -6,7 +6,7 @@ export function useConfiguration(options?: {
   onChange?: (config: any) => void;
 }) {
   const { isModerator, isLoading } = useAuthentication();
-  const [config, setConfig] = useState();
+  const [config, setConfig] = useState<any>();
   const [version, setVersion] = useState(
     !options || !options.defaultVerion ? "1.0" : options.defaultVerion,
   );
@@ -15,10 +15,12 @@ export function useConfiguration(options?: {
     let config = window.Twitch.ext.configuration.broadcaster
       ? window.Twitch.ext.configuration.broadcaster.content
       : [];
+    window.Twitch.ext.rig.log(config);
     try {
       config = JSON.parse(config);
     } catch (e) {
       config = [];
+      window.Twitch.ext.rig.log("Failed Parsing");
     }
     return config;
   };
@@ -47,6 +49,7 @@ export function useConfiguration(options?: {
 
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
+      window.Twitch.ext.rig.log("Saving Config");
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
     }
   };

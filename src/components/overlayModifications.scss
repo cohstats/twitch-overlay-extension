@@ -1,0 +1,31 @@
+.ant-drawer-content {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+@supports (backdrop-filter: opacity(1)) {
+  .ant-drawer-content {
+    //background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+  }
+}
+
+.ant-table {
+  background-color: transparent;
+}
+
+.ant-table-cell {
+  background-color: transparent;
+}
+
+.ant-table-thead {
+  background-color: transparent;
+}
+
+.ant.table-thead > tr > th {
+  background-color: transparent;
+}
+
+th {
+  background-color: transparent !important;
+}

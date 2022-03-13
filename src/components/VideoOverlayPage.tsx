@@ -3,9 +3,12 @@ import { useAuthentication } from "../util/TwitchHooks/useAuthentication";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useExtensionVisible } from "../util/TwitchHooks/useExtensionVisible";
 import "./global.scss";
+import "./overlayModifications.scss";
 import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 import { Button, Drawer } from "antd";
 import { events, firebaseInit } from "../firebase";
+import TeamView from "./TeamView";
+import { testData } from "../util/TestData";
 
 declare global {
   interface Window {
@@ -19,7 +22,7 @@ declare global {
 // This has to happen once on the main file of each render process
 firebaseInit();
 
-const VideoOverlay = () => {
+const VideoOverlayPage = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const extensionVisible = useExtensionVisible();
   const { isLoading } = useAuthentication();
@@ -66,7 +69,7 @@ const VideoOverlay = () => {
           headerStyle={{ background: "rgba(255, 255, 255, 0)" }}
           maskStyle={{ background: "transparent" }}
         >
-          Items
+          <TeamView side={testData.left} />
         </Drawer>
       </>
     );
@@ -75,4 +78,4 @@ const VideoOverlay = () => {
   }
 };
 
-export default VideoOverlay;
+export default VideoOverlayPage;

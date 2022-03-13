@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import VideoOverlay from "./components/VideoOverlay";
+import VideoOverlayPage from "./components/VideoOverlayPage";
 
-ReactDOM.render(<VideoOverlay />, document.getElementById("root"));
+ReactDOM.render(<VideoOverlayPage />, document.getElementById("root"));
