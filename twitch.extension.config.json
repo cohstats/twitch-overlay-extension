@@ -38,17 +38,83 @@
       "orientation": "Portrait",
       "type": "video_overlay",
       "viewerType": "Logged-Out Viewer"
+    },
+    {
+      "channelId": "775994822",
+      "configurationAnchor": "video_overlay",
+      "displayChannelName": "johannesmerkt",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "2",
+      "isPopout": false,
+      "label": "OverlayConfig",
+      "linked": true,
+      "linkedUserId": "265737932",
+      "orientation": "Portrait",
+      "type": "config",
+      "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "775994822",
+      "configurationAnchor": "panel",
+      "displayChannelName": "johannesmerkt",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "3",
+      "isPopout": false,
+      "label": "PanelConfig",
+      "linked": true,
+      "linkedUserId": "265737932",
+      "orientation": "Portrait",
+      "type": "config",
+      "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "775994822",
+      "configurationAnchor": "panel",
+      "displayChannelName": "johannesmerkt",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "4",
+      "isPopout": false,
+      "label": "Panel Logged-Out Viewer",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Logged-Out Viewer"
     }
   ],
   "manifest": {
-    "anchor": "video_overlay",
+    "anchor": "panel",
     "assetUrls": [],
     "authorName": "COH Stats",
     "bitsEnabled": false,
     "canInstall": true,
     "configUrl": "https://localhost:8080/config.html",
-    "configurationLocation": "none",
-    "description": "",
+    "configurationLocation": "hosted",
+    "description": " ",
     "eulaTosUrl": "",
     "hasChatSupport": false,
     "iconUrl": "",
@@ -57,7 +123,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "Coh2StatsOverlay",
-    "panelHeight": 0,
+    "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -70,29 +136,20 @@
     "vendorCode": "",
     "version": "0.0.1",
     "viewerSummary": "",
-    "viewerUrl": "",
+    "viewerUrl": "https://localhost:8080/panel.html",
     "viewerUrls": {
-      "videoOverlay": "https://localhost:8080/video_overlay.html",
-      "component": "https://localhost:8080/video_component.html"
+      "panel": "https://localhost:8080/panel.html",
+      "videoOverlay": "https://localhost:8080/video_overlay.html"
     },
     "views": {
+      "panel": {
+        "viewerUrl": "https://localhost:8080/panel.html",
+        "height": 500,
+        "canLinkExternalContent": false
+      },
       "videoOverlay": {
         "viewerUrl": "https://localhost:8080/video_overlay.html",
         "canLinkExternalContent": false
-      },
-      "component": {
-        "viewerUrl": "https://localhost:8080/video_component.html",
-        "aspectWidth": 0,
-        "aspectHeight": 0,
-        "aspectRatioX": 300,
-        "aspectRatioY": 200,
-        "scalePixels": 1024,
-        "targetHeight": 4000,
-        "size": 0,
-        "zoom": false,
-        "zoomPixels": 0,
-        "canLinkExternalContent": false,
-        "autoScale": true
       },
       "config": {
         "viewerUrl": "https://localhost:8080/config.html",
