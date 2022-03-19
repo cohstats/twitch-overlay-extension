@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useAuthentication } from "../util/TwitchHooks/useAuthentication";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useExtensionVisible } from "../util/TwitchHooks/useExtensionVisible";
 import "./global.scss";
 import "./overlayModifications.scss";
-import inGameScreenShot from "../../public/ingameScreenshot.jpg";
-import safeZones from "../../public/safezones.png";
-import { Button, Col, Drawer, Row } from "antd";
+//import inGameScreenShot from "../../public/ingameScreenshot.jpg";
+//import safeZones from "../../public/safezones.png";
+import { Button, Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
 import { events, firebaseInit } from "../firebase";
 import TeamView from "./TeamView";
-import { testData } from "../util/TestData";
+import { GameData } from "../util/App/GameData";
+import Title from "antd/lib/typography/Title";
+import { LoadingOutlined } from "@ant-design/icons";
+import GameBalanceView from "./gameBalanceView";
+import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
 
 declare global {
   interface Window {
@@ -26,7 +29,9 @@ firebaseInit();
 const VideoOverlayPage = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const extensionVisible = useExtensionVisible();
-  const { isLoading } = useAuthentication();
+  const [gameData, setGameData] = useState<GameData | undefined>(undefined);
+  const [tab, setTap] = useState(0);
+  const { config } = useConfiguration();
 
   const showDrawer = () => {
     setDrawerVisible(true);
@@ -36,31 +41,37 @@ const VideoOverlayPage = () => {
     setDrawerVisible(false);
   };
 
+  const handleTabChange = (event: RadioChangeEvent) => {
+    setTap(event.target.value);
+  };
+
   // listen to the data from firestore
   useEffect(() => {
     events.init("overlay");
 
+    /*
     // This will be the ID which will the twitch streamer setup
-    const id = "jjcD0QWTwzydSwYoxSkS";
+    const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
     onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
-      window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
-    });
+      //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
+      setGameData(doc.data().data.game);
+    });*/
   }, []);
 
-  if (!isLoading && extensionVisible) {
+  useEffect(() => {
+    if (config && config.uuid) {
+      console.log("Loaded Extension Config: ", config);
+      onSnapshot(doc(getFirestore(), "twitch-ext-public", config.uuid), (doc) => {
+        //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
+        setGameData(doc.data().data.game);
+      });
+    }
+  }, [config]);
+
+  if (extensionVisible) {
     // !isLoading && extensionVisible
     return (
       <>
-        <img
-          src={inGameScreenShot}
-          alt=""
-          style={{ position: "absolute", inset: 0, width: "100%" }}
-        />
-        <img
-          src={safeZones}
-          alt=""
-          style={{ position: "absolute", inset: 0, width: "100%", display: "none" }}
-        />
         {!drawerVisible ? (
           <Button
             style={{ position: "absolute", bottom: "2rem", left: "45%", right: "45%" }}
@@ -71,10 +82,19 @@ const VideoOverlayPage = () => {
           </Button>
         ) : null}
         <Drawer
+          title={
+            gameData ? (
+              gameData.state === "ingame" || gameData.state === "loading" ? (
+                <>Current Game</>
+              ) : (
+                <>Last Game</>
+              )
+            ) : undefined
+          }
           placement="bottom"
           visible={drawerVisible}
           onClose={onCloseDrawer}
-          height={"22.1rem"}
+          height={"23.6rem"}
           contentWrapperStyle={{
             paddingLeft: "4rem",
             paddingRight: "7rem",
@@ -82,26 +102,57 @@ const VideoOverlayPage = () => {
           }}
           headerStyle={{ background: "rgba(255, 255, 255, 0)" }}
           maskStyle={{ background: "transparent" }}
+          extra={
+            <>
+              <Radio.Group buttonStyle="solid" value={tab} onChange={handleTabChange}>
+                <Radio.Button value={0}>Players</Radio.Button>
+                <Radio.Button value={1}>Prediction</Radio.Button>
+              </Radio.Group>
+            </>
+          }
         >
-          <Row>
-            <Col span={11}>
-              <TeamView side={testData.left} />
-            </Col>
-            <Col
-              span={2}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                paddingTop: 22,
-              }}
-            >
-              <h1>VS</h1>
-            </Col>
-            <Col span={11}>
-              <TeamView side={testData.right} />
-            </Col>
-          </Row>
+          {tab === 0 ? (
+            <>
+              {gameData ? (
+                <Row>
+                  <Col span={11}>
+                    <TeamView side={gameData.left} />
+                  </Col>
+                  <Col
+                    span={2}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      paddingTop: 22,
+                    }}
+                  >
+                    <h1>VS</h1>
+                  </Col>
+                  <Col span={11}>
+                    <TeamView side={gameData.right} />
+                  </Col>
+                </Row>
+              ) : null}
+            </>
+          ) : (
+            <>
+              {gameData ? (
+                <>
+                  <GameBalanceView gameData={gameData} />
+                </>
+              ) : null}
+            </>
+          )}
+
+          {!gameData ? (
+            <div style={{ textAlign: "center", paddingTop: 10, paddingBottom: 15 }}>
+              <Title>
+                <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} /> Waiting for
+                a game
+              </Title>
+            </div>
+          ) : null}
         </Drawer>
       </>
     );
@@ -111,3 +162,16 @@ const VideoOverlayPage = () => {
 };
 
 export default VideoOverlayPage;
+
+/*
+        <img
+          src={inGameScreenShot}
+          alt=""
+          style={{ position: "absolute", inset: 0, width: "100%" }}
+        />
+        <img
+          src={safeZones}
+          alt=""
+          style={{ position: "absolute", inset: 0, width: "100%", display: "none" }}
+        />
+*/

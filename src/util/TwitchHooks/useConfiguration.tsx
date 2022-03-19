@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useAuthentication } from "./useAuthentication";
 
 export function useConfiguration(options?: {
-  defaultVerion?: string;
+  defaultVersion?: string;
   onChange?: (config: any) => void;
 }) {
   const { isModerator, isLoading } = useAuthentication();
-  const [config, setConfig] = useState<any>();
+  const [config, setConfig] = useState<any>({});
   const [version, setVersion] = useState(
-    !options || !options.defaultVerion ? "1.0" : options.defaultVerion,
+    !options || !options.defaultVersion ? "1.0" : options.defaultVersion,
   );
+  const [isLoadingConf, setIsLoadingConf] = useState(true);
 
   const getConfig = () => {
     let config = window.Twitch.ext.configuration.broadcaster
@@ -34,6 +35,7 @@ export function useConfiguration(options?: {
   useEffect(() => {
     if (window.Twitch && window.Twitch.ext && !isLoading && isModerator) {
       setConfig(getConfig());
+      setIsLoadingConf(false);
       updateVersion();
       window.Twitch.ext.configuration.onChanged(() => {
         updateVersion();
@@ -54,5 +56,5 @@ export function useConfiguration(options?: {
     }
   };
 
-  return { isLoading, config, setConfig: setConfigExternal, version };
+  return { isLoading: isLoadingConf, config, setConfig: setConfigExternal, version };
 }

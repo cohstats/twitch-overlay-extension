@@ -28,7 +28,7 @@ const PanelPage = () => {
     // This will be the ID which will the twitch streamer setup
     const id = "jjcD0QWTwzydSwYoxSkS";
     onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
-      window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
+      //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
     });
   }, []);
 

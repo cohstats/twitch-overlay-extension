@@ -32,7 +32,12 @@ const TeamView: React.FC<Props> = ({ side }) => {
                     countryCode={member.country}
                     style={{ width: "1.2em", height: "1.2em", paddingRight: 0, marginRight: 4 }}
                   />
-                  <Typography.Link>{member.name}</Typography.Link>
+                  <Typography.Link
+                    href={"https://coh2stats.com/players/" + member.steamID}
+                    target="_blank"
+                  >
+                    {member.name}
+                  </Typography.Link>
                 </div>
               );
             })}

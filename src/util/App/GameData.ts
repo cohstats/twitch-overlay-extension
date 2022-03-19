@@ -32,6 +32,8 @@ export interface SideData {
   side: TeamSide;
   solo: LadderStats[];
   teams: LadderStats[];
+  averageLevel: number | undefined;
+  averageWinRatio: number | undefined;
 }
 
 export type GameType = "classic" | "ai" | "custom";
@@ -40,10 +42,13 @@ export type GameState = "closed" | "menu" | "loading" | "ingame";
 
 export interface GameData {
   found: boolean;
+  uniqueId: string;
   state: GameState;
   type: GameType;
   map: string;
   winCondition: string;
   left: SideData;
   right: SideData;
+  mapWinRatioLeft: number | undefined;
+  winProbabilityLeft: number | undefined;
 }

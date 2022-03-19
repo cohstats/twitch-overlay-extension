@@ -32,7 +32,7 @@ th {
 
 .ant-drawer-body {
   padding-bottom: 0;
-  padding-top: 16px;
+  padding-top: 0;
 }
 
 .ant-table-tbody > tr > td {
@@ -45,4 +45,8 @@ th {
 
 .ant-table-cell-row-hover {
   background-color: rgba(255, 255, 255, 0.288) !important;
+}
+
+.ant-drawer-header {
+  border-bottom: transparent;
 }

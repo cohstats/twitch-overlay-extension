@@ -58,6 +58,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "antd": "^4.19.1",
     "core-js": "^3.5.0",
     "firebase": "^9.6.8",
