@@ -1,4 +1,4 @@
-import { Col, Row, Table, Tooltip, Typography } from "antd";
+import { Table, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { BaseType } from "antd/lib/typography/Base";
 import Text from "antd/lib/typography/Text";
@@ -130,6 +130,7 @@ const GameBalanceView: React.FC<Props> = ({ gameData }) => {
               <>
                 Based on{" "}
                 <Typography.Link
+                  target="_blank"
                   href={
                     "https://coh2stats.com/map-stats?range=month&type=" +
                     gameData.left.solo.length +
@@ -228,17 +229,13 @@ const GameBalanceView: React.FC<Props> = ({ gameData }) => {
 
   return (
     <>
-      <Row>
-        <Col span={14} offset={5}>
-          <Table
-            columns={tableColumns}
-            dataSource={tableDataSource}
-            rowKey={(data) => data.key}
-            pagination={false}
-            size={"small"}
-          />
-        </Col>
-      </Row>
+      <Table
+        columns={tableColumns}
+        dataSource={tableDataSource}
+        rowKey={(data) => data.key}
+        pagination={false}
+        size={"small"}
+      />
     </>
   );
 };

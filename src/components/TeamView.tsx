@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ColumnsType } from "antd/lib/table";
 import { Helper } from "../util/Shared/helper";
 import { SideData, LadderStats, Member } from "../util/App/GameData";
@@ -6,46 +6,55 @@ import { Tooltip, Typography, Table } from "antd";
 import { levelToText } from "../util/Shared/helpers";
 import { FactionIcon } from "./faction-icon";
 import { CountryFlag } from "./country-flag";
+import { useElementSize } from "@mantine/hooks";
 
 interface Props {
   side: SideData;
 }
 
 const TeamView: React.FC<Props> = ({ side }) => {
-  const TableColumns: ColumnsType<LadderStats> = [
-    {
-      title: "Alias",
-      dataIndex: "members",
-      key: "members",
-      render: (members: Member[]) => {
-        return (
-          <div>
-            {members.map((member) => {
-              return (
-                <div key={member.relicID}>
-                  <FactionIcon
-                    ai={member.ai}
-                    faction={member.faction}
-                    style={{ width: "1.2em", height: "1.2em", marginRight: 4 }}
-                  />
-                  <CountryFlag
-                    countryCode={member.country}
-                    style={{ width: "1.2em", height: "1.2em", paddingRight: 0, marginRight: 4 }}
-                  />
+  const { ref, width, height } = useElementSize();
+  useEffect(() => {
+    window.Twitch.ext.rig.log(`dimensions: ${width} ${height}`);
+  }, [width, height]);
+  const TableColumns: ColumnsType<LadderStats> = [];
+  TableColumns.push({
+    title: "Alias",
+    dataIndex: "members",
+    width: 150,
+    key: "members",
+    render: (members: Member[]) => {
+      return (
+        <div style={{ textOverflow: "ellipsis", width: 150 }}>
+          {members.map((member) => {
+            return (
+              <div key={member.relicID}>
+                <FactionIcon
+                  ai={member.ai}
+                  faction={member.faction}
+                  style={{ width: "1.2em", height: "1.2em", marginRight: 4 }}
+                />
+                <CountryFlag
+                  countryCode={member.country}
+                  style={{ width: "1.2em", height: "1.2em", paddingRight: 0, marginRight: 4 }}
+                />
+                <Tooltip title={member.name}>
                   <Typography.Link
                     href={"https://coh2stats.com/players/" + member.steamID}
                     target="_blank"
                   >
                     {member.name}
                   </Typography.Link>
-                </div>
-              );
-            })}
-          </div>
-        );
-      },
+                </Tooltip>
+              </div>
+            );
+          })}
+        </div>
+      );
     },
-    {
+  });
+  if (width >= 200) {
+    TableColumns.push({
       title: "Rank",
       dataIndex: "rank",
       key: "rank",
@@ -58,13 +67,15 @@ const TeamView: React.FC<Props> = ({ side }) => {
           return rank;
         }
       },
-    },
-    {
+    });
+  }
+  if (width >= 270) {
+    TableColumns.push({
       title: "T Rank",
       dataIndex: "teamrank",
       key: "teamrank",
       align: "center" as const,
-      width: 60,
+      width: 70,
       render: (teamrank: number) => {
         if (!teamrank) {
           return "";
@@ -75,8 +86,10 @@ const TeamView: React.FC<Props> = ({ side }) => {
           return teamrank;
         }
       },
-    },
-    {
+    });
+  }
+  if (width >= 340) {
+    TableColumns.push({
       title: (
         <>
           Level{" "}
@@ -100,13 +113,15 @@ const TeamView: React.FC<Props> = ({ side }) => {
           return <Tooltip title={levelToText(level)}>{level}</Tooltip>;
         }
       },
-    },
-    {
+    });
+  }
+  if (width >= 430) {
+    TableColumns.push({
       title: "Streak",
       key: "streak",
       align: "center" as const,
       width: 50,
-      responsive: ["md"],
+      responsive: ["sm"],
       //sorter: (a, b) => a.streak - b.streak,
       render: (data: LadderStats) => {
         if (data.wins + data.losses > 0) {
@@ -119,12 +134,15 @@ const TeamView: React.FC<Props> = ({ side }) => {
           return "-";
         }
       },
-    },
-    {
+    });
+  }
+  if (width >= 380) {
+    TableColumns.push({
       title: "Ratio",
       key: "ratio",
       align: "center" as const,
       width: 40,
+      responsive: ["sm"],
       /*sorter: (a, b) => {
         return (
           Math.round(100 * Number(a.wins / (a.losses + a.wins))) -
@@ -138,12 +156,13 @@ const TeamView: React.FC<Props> = ({ side }) => {
           return "-";
         }
       },
-    },
-  ];
+    });
+  }
 
   return (
     <>
       <Table
+        ref={ref}
         style={{ paddingBottom: 20, overflow: "auto" }}
         columns={TableColumns}
         dataSource={side.solo}

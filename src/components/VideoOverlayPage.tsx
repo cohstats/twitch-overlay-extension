@@ -48,14 +48,15 @@ const VideoOverlayPage = () => {
   // listen to the data from firestore
   useEffect(() => {
     events.init("overlay");
+  }, []);
 
-    /*
+  useEffect(() => {
     // This will be the ID which will the twitch streamer setup
     const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
     onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
       //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
       setGameData(doc.data().data.game);
-    });*/
+    });
   }, []);
 
   useEffect(() => {
