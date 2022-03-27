@@ -49,6 +49,7 @@ export function useConfiguration(options?: {
 
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
+      window.Twitch.ext.rig.log("Saving Config");
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
     }
   };
