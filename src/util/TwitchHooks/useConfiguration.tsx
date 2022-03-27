@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import { useAuthentication } from "./useAuthentication";
 
 export function useConfiguration(options?: {
-  defaultVerion?: string;
+  defaultVersion?: string;
   onChange?: (config: any) => void;
 }) {
   const { isModerator, isLoading } = useAuthentication();
-  const [config, setConfig] = useState();
+  const [config, setConfig] = useState<any>({});
   const [version, setVersion] = useState(
-    !options || !options.defaultVerion ? "1.0" : options.defaultVerion,
+    !options || !options.defaultVersion ? "1.0" : options.defaultVersion,
   );
+  const [isLoadingConf, setIsLoadingConf] = useState(true);
 
   const getConfig = () => {
     let config = window.Twitch.ext.configuration.broadcaster
       ? window.Twitch.ext.configuration.broadcaster.content
       : [];
+    window.Twitch.ext.rig.log(config);
     try {
       config = JSON.parse(config);
     } catch (e) {
       config = [];
+      window.Twitch.ext.rig.log("Failed Parsing");
     }
     return config;
   };
@@ -32,6 +35,7 @@ export function useConfiguration(options?: {
   useEffect(() => {
     if (window.Twitch && window.Twitch.ext && !isLoading && isModerator) {
       setConfig(getConfig());
+      setIsLoadingConf(false);
       updateVersion();
       window.Twitch.ext.configuration.onChanged(() => {
         updateVersion();
@@ -47,9 +51,10 @@ export function useConfiguration(options?: {
 
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
+      window.Twitch.ext.rig.log("Saving Config");
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
     }
   };
 
-  return { isLoading, config, setConfig: setConfigExternal, version };
+  return { isLoading: isLoadingConf, config, setConfig: setConfigExternal, version };
 }

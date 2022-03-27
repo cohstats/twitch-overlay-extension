@@ -63,7 +63,7 @@
     },
     {
       "channelId": "775994822",
-      "configurationAnchor": "panel",
+      "configurationAnchor": "video_overlay",
       "displayChannelName": "johannesmerkt",
       "features": {
         "isBitsEnabled": false,
@@ -71,43 +71,21 @@
         "isSubscriptionStatusAvailable": false
       },
       "frameSize": {
-        "width": 1280,
-        "height": 720
+        "width": 852,
+        "height": 480
       },
       "id": "3",
       "isPopout": false,
-      "label": "PanelConfig",
-      "linked": true,
-      "linkedUserId": "265737932",
-      "orientation": "Portrait",
-      "type": "config",
-      "viewerType": "Broadcaster"
-    },
-    {
-      "channelId": "775994822",
-      "configurationAnchor": "panel",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "4",
-      "isPopout": false,
-      "label": "Panel Logged-Out Viewer",
+      "label": "Small view",
       "linked": false,
       "linkedUserId": "",
       "orientation": "Portrait",
-      "type": "panel",
+      "type": "video_overlay",
       "viewerType": "Logged-Out Viewer"
     }
   ],
   "manifest": {
-    "anchor": "panel",
+    "anchor": "video_overlay",
     "assetUrls": [],
     "authorName": "COH Stats",
     "bitsEnabled": false,
@@ -123,7 +101,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "Coh2StatsOverlay",
-    "panelHeight": 500,
+    "panelHeight": 0,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -136,17 +114,11 @@
     "vendorCode": "",
     "version": "0.0.1",
     "viewerSummary": "",
-    "viewerUrl": "https://localhost:8080/panel.html",
+    "viewerUrl": "",
     "viewerUrls": {
-      "panel": "https://localhost:8080/panel.html",
       "videoOverlay": "https://localhost:8080/video_overlay.html"
     },
     "views": {
-      "panel": {
-        "viewerUrl": "https://localhost:8080/panel.html",
-        "height": 500,
-        "canLinkExternalContent": false
-      },
       "videoOverlay": {
         "viewerUrl": "https://localhost:8080/video_overlay.html",
         "canLinkExternalContent": false
