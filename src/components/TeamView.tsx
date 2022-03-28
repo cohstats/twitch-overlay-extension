@@ -25,10 +25,18 @@ const TeamView: React.FC<Props> = ({ side }) => {
     key: "members",
     render: (members: Member[]) => {
       return (
-        <div style={{ textOverflow: "ellipsis", width: 150 }}>
+        <div style={{ width: 150 }}>
           {members.map((member) => {
             return (
-              <div key={member.relicID}>
+              <div
+                key={member.relicID}
+                style={{
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  width: 150,
+                }}
+              >
                 <FactionIcon
                   ai={member.ai}
                   faction={member.faction}
