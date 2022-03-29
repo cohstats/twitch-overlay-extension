@@ -62,7 +62,6 @@ const VideoOverlayPage = () => {
 
   useEffect(() => {
     if (config && config.uuid) {
-      console.log("Loaded Extension Config: ", config);
       onSnapshot(doc(getFirestore(), "twitch-ext-public", config.uuid), (doc) => {
         //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
         setGameData(doc.data().data.game);

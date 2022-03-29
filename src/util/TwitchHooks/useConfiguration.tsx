@@ -20,7 +20,6 @@ export function useConfiguration(options?: {
       config = JSON.parse(config);
     } catch (e) {
       config = undefined;
-      console.log("Failed get config");
     }
     return config;
   };
@@ -33,10 +32,8 @@ export function useConfiguration(options?: {
 
   useEffect(() => {
     if (window.Twitch && window.Twitch.ext) {
-      //setConfig(getConfig());
 
       window.Twitch.ext.configuration.onChanged(() => {
-        console.log("Get config");
         updateVersion();
         const config = getConfig();
         setConfig(config);
@@ -54,7 +51,6 @@ export function useConfiguration(options?: {
       window.Twitch.ext.rig.log("Saving Config");
 
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
-      console.log("Saving config");
     }
   };
 
