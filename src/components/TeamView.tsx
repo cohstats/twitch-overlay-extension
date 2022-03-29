@@ -61,7 +61,7 @@ const TeamView: React.FC<Props> = ({ side }) => {
       );
     },
   });
-  if (width >= 200) {
+  if (width > 201) {
     TableColumns.push({
       title: "Rank",
       dataIndex: "rank",
@@ -77,7 +77,7 @@ const TeamView: React.FC<Props> = ({ side }) => {
       },
     });
   }
-  if (width >= 270) {
+  if (width > 271) {
     TableColumns.push({
       title: "T Rank",
       dataIndex: "teamrank",
@@ -96,7 +96,7 @@ const TeamView: React.FC<Props> = ({ side }) => {
       },
     });
   }
-  if (width >= 340) {
+  if (width > 341) {
     TableColumns.push({
       title: (
         <>
@@ -123,7 +123,7 @@ const TeamView: React.FC<Props> = ({ side }) => {
       },
     });
   }
-  if (width >= 430) {
+  if (width > 431) {
     TableColumns.push({
       title: "Streak",
       key: "streak",
@@ -144,7 +144,7 @@ const TeamView: React.FC<Props> = ({ side }) => {
       },
     });
   }
-  if (width >= 380) {
+  if (width > 381) {
     TableColumns.push({
       title: "Ratio",
       key: "ratio",
