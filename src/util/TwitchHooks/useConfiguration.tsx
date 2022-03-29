@@ -32,7 +32,6 @@ export function useConfiguration(options?: {
 
   useEffect(() => {
     if (window.Twitch && window.Twitch.ext) {
-
       window.Twitch.ext.configuration.onChanged(() => {
         updateVersion();
         const config = getConfig();
