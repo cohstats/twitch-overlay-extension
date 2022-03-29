@@ -32,6 +32,7 @@ const VideoOverlayPage = () => {
   const [gameData, setGameData] = useState<GameData | undefined>(undefined);
   const [tab, setTap] = useState(0);
   const { config } = useConfiguration();
+  const [buttonPosition, setButtonPosition] = useState("minimap");
 
   const showDrawer = () => {
     setDrawerVisible(true);
@@ -48,10 +49,11 @@ const VideoOverlayPage = () => {
   // listen to the data from firestore
   useEffect(() => {
     events.init("overlay");
+  }, []);
 
-    /*
+  useEffect(() => {
     // This will be the ID which will the twitch streamer setup
-    const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
+    /*const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
     onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
       //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
       setGameData(doc.data().data.game);
@@ -60,13 +62,34 @@ const VideoOverlayPage = () => {
 
   useEffect(() => {
     if (config && config.uuid) {
-      console.log("Loaded Extension Config: ", config);
       onSnapshot(doc(getFirestore(), "twitch-ext-public", config.uuid), (doc) => {
         //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
         setGameData(doc.data().data.game);
       });
     }
+    if (config && config.buttonPosition) {
+      setButtonPosition(config.buttonPosition);
+    }
   }, [config]);
+
+  let leftButtonPosition = "83%";
+  let bottomButtonPosition = "18%";
+  if (buttonPosition === "minimap") {
+    leftButtonPosition = "2%";
+    bottomButtonPosition = "34%";
+  }
+  if (buttonPosition === "above") {
+    leftButtonPosition = "52%";
+    bottomButtonPosition = "23%";
+  }
+  if (buttonPosition === "below") {
+    leftButtonPosition = "52%";
+    bottomButtonPosition = "12%";
+  }
+  if (buttonPosition === "overgrid") {
+    leftButtonPosition = "83%";
+    bottomButtonPosition = "29%";
+  }
 
   if (extensionVisible) {
     // !isLoading && extensionVisible
@@ -74,7 +97,11 @@ const VideoOverlayPage = () => {
       <>
         {!drawerVisible ? (
           <Button
-            style={{ position: "absolute", bottom: "2rem", left: "45%", right: "45%" }}
+            style={{
+              position: "absolute",
+              bottom: bottomButtonPosition,
+              left: leftButtonPosition,
+            }}
             type="primary"
             onClick={showDrawer}
           >
