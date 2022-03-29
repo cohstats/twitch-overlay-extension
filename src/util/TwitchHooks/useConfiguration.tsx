@@ -20,6 +20,7 @@ export function useConfiguration(options?: {
       config = JSON.parse(config);
     } catch (e) {
       config = undefined;
+      console.log("Failed get config");
     }
     return config;
   };
@@ -31,14 +32,15 @@ export function useConfiguration(options?: {
   };
 
   useEffect(() => {
-    if (window.Twitch && window.Twitch.ext && !isLoading && isModerator) {
+    if (window.Twitch && window.Twitch.ext) {
       //setConfig(getConfig());
-      setIsLoadingConf(false);
-      updateVersion();
+
       window.Twitch.ext.configuration.onChanged(() => {
+        console.log("Get config");
         updateVersion();
         const config = getConfig();
         setConfig(config);
+        setIsLoadingConf(false);
         if (options && options.onChange) {
           options.onChange(config);
         }
@@ -50,7 +52,9 @@ export function useConfiguration(options?: {
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
       window.Twitch.ext.rig.log("Saving Config");
+
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
+      console.log("Saving config");
     }
   };
 

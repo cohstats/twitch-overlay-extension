@@ -63,7 +63,7 @@ const ConfigPage = () => {
     window.Twitch.ext.rig.log(`Config Version data: ${version}`);
     return (
       <>
-        <Form layout="vertical" style={{ padding: 20 }}>
+        <Form layout="vertical" style={{ padding: 20, backgroundColor: "white" }}>
           <div style={{ paddingBottom: 20 }}>
             <Title level={2}>Configuration</Title>
             To send your Company of Heroes 2 match stats to this twitch extension the{" "}
