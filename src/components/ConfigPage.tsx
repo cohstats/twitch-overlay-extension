@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./global.scss";
-import { /*events,*/ firebaseInit } from "../firebase";
+//import { /*events,*/ firebaseInit } from "../firebase";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
 import { Form, Input, Select, Typography } from "antd";
 import Text from "antd/lib/typography/Text";
@@ -17,7 +17,7 @@ declare global {
 
 // We need to initialize our Firebase
 // This has to happen once on the main file of each render process
-firebaseInit();
+//firebaseInit();
 
 const ConfigPage = () => {
   const { isLoading, config, version, setConfig } = useConfiguration(); // <- use this hook to set and get the configuration

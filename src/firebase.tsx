@@ -30,10 +30,10 @@ const firebaseInit = (): void => {
 
 // We should start all events with EA as indicator that it's electron app
 // Analytics events can be called only after firabaseInit!
-const events = {
-  //init: (type: string): void => {
-  //logEvent(analytics, `twitch_init_${type}`);
-  //},
-};
+/*const events = {
+  init: (type: string): void => {
+  logEvent(analytics, `twitch_init_${type}`);
+  },
+};*/
 
-export { firebaseInit /*events*/ };
+export { firebaseInit /*, events*/ };
