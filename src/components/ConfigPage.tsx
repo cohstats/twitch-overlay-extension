@@ -66,14 +66,14 @@ const ConfigPage = () => {
         <Form layout="vertical" style={{ padding: 20, backgroundColor: "white" }}>
           <div style={{ paddingBottom: 20 }}>
             <Title level={2}>Configuration</Title>
-            To send your Company of Heroes 2 match stats to this twitch extension the{" "}
+            To send your Company of Heroes 2 match stats to this twitch extension, the{" "}
             <Typography.Link href="https://coh2stats.com/desktop-app" target={"_blank"}>
               COH2 Game Stats Desktop App{" "}
             </Typography.Link>{" "}
             is needed. Enable the "twitch extension" section in the apps settings and go through
-            the configuration. Once the configuration inside the app is completed you will recieve
-            a UUID that needs to be pasted into the UUID field below. Now save the settings and
-            the extension is ready!
+            the configuration. Once the configuration inside the app is completed, you will
+            receive a UUID that needs to be pasted into the UUID field below. Now save the
+            settings and the extension is ready!
           </div>
           <Form.Item label="UUID">
             <Input.Password value={uuid} onChange={handleUUIDChange} />
