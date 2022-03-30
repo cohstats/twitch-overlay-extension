@@ -3,7 +3,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./global.scss";
 import { events, firebaseInit } from "../firebase";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
-import { Button, Form, Input, Select, Typography } from "antd";
+import { Form, Input, Select, Typography } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
 
@@ -47,15 +47,13 @@ const ConfigPage = () => {
   }, [config, formInitialized]);
 
   const handleUUIDChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setConfig(version, { uuid: event.target.value, buttonPosition: buttonPosition });
     setUUID(event.target.value);
   };
 
   const handleButtonPositionChange = (value: string) => {
+    setConfig(version, { uuid: uuid, buttonPosition: value });
     setButtonPosition(value);
-  };
-
-  const handleSave = () => {
-    setConfig(version, { uuid: uuid, buttonPosition: buttonPosition });
   };
 
   if (!isLoading) {
@@ -91,12 +89,6 @@ const ConfigPage = () => {
               <Select.Option value="overgrid">Right: Above Button Grid</Select.Option>
               <Select.Option value="grid">Right: Over Button Grid</Select.Option>
             </Select>
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" onClick={handleSave}>
-              Save
-            </Button>
           </Form.Item>
         </Form>
       </>
