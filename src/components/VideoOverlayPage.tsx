@@ -5,7 +5,7 @@ import "./global.scss";
 import "./overlayModifications.scss";
 //import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 //import safeZones from "../../public/safezones.png";
-import { Button, Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
+import { Button, Col, Drawer, Radio, RadioChangeEvent, Row, Spin, Tooltip } from "antd";
 import { /*events,*/ firebaseInit } from "../firebase";
 import TeamView from "./TeamView";
 import { GameData } from "../util/App/GameData";
@@ -13,6 +13,7 @@ import Title from "antd/lib/typography/Title";
 import { LoadingOutlined } from "@ant-design/icons";
 import GameBalanceView from "./gameBalanceView";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
+import { useViewportSize } from "@mantine/hooks";
 
 declare global {
   interface Window {
@@ -26,7 +27,9 @@ declare global {
 // This has to happen once on the main file of each render process
 firebaseInit();
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const VideoOverlayPage = () => {
+  const { height, width } = useViewportSize();
   const [drawerVisible, setDrawerVisible] = useState(false);
   const extensionVisible = useExtensionVisible();
   const [gameData, setGameData] = useState<GameData | undefined>(undefined);
@@ -45,20 +48,6 @@ const VideoOverlayPage = () => {
   const handleTabChange = (event: RadioChangeEvent) => {
     setTap(event.target.value);
   };
-
-  // listen to the data from firestore
-  useEffect(() => {
-    //events.init("overlay");
-  }, []);
-
-  useEffect(() => {
-    // This will be the ID which will the twitch streamer setup
-    /*const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
-    onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
-      //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
-      setGameData(doc.data().data.game);
-    });*/
-  }, []);
 
   useEffect(() => {
     if (config && config.uuid) {
@@ -91,22 +80,38 @@ const VideoOverlayPage = () => {
     bottomButtonPosition = "29%";
   }
 
+  // if the stream is watched on a tiny view the overlay cannot be displayed properly anymore
+  const twitchPlayerTooSmall = width < 700 || height < 380;
+
   if (extensionVisible) {
     // !isLoading && extensionVisible
     return (
       <>
-        {!drawerVisible ? (
-          <Button
-            style={{
-              position: "absolute",
-              bottom: bottomButtonPosition,
-              left: leftButtonPosition,
-            }}
-            type="primary"
-            onClick={showDrawer}
-          >
-            Show Player Stats
-          </Button>
+        {!drawerVisible || twitchPlayerTooSmall ? (
+          <>
+            <Button
+              style={{
+                position: "absolute",
+                bottom: bottomButtonPosition,
+                left: leftButtonPosition,
+              }}
+              type={twitchPlayerTooSmall ? "dashed" : "primary"}
+              danger={twitchPlayerTooSmall}
+              onClick={showDrawer}
+            >
+              {twitchPlayerTooSmall ? (
+                <>
+                  <Tooltip
+                    overlay={"Cannot display stats because the twitch player view is too small"}
+                  >
+                    Show Player Stats
+                  </Tooltip>
+                </>
+              ) : (
+                <>Show Player Stats</>
+              )}
+            </Button>
+          </>
         ) : null}
         <Drawer
           title={
@@ -119,7 +124,7 @@ const VideoOverlayPage = () => {
             ) : undefined
           }
           placement="bottom"
-          visible={drawerVisible}
+          visible={drawerVisible && !twitchPlayerTooSmall}
           onClose={onCloseDrawer}
           height={"23.6rem"}
           contentWrapperStyle={{
@@ -189,6 +194,24 @@ const VideoOverlayPage = () => {
 };
 
 export default VideoOverlayPage;
+
+/*
+  // listen to the data from firestore
+  useEffect(() => {
+    //events.init("overlay");
+  }, []);
+*/
+
+/*
+  useEffect(() => {
+    // This will be the ID which will the twitch streamer setup
+    const id = "11307ae6-b769-4d69-9a6f-4af5f83c18b8";
+    onSnapshot(doc(getFirestore(), "twitch-ext-public", id), (doc) => {
+      //window.Twitch.ext.rig.log(`Some data: ${doc.data().test}`);
+      setGameData(doc.data().data.game);
+    });
+  }, []);
+*/
 
 /*
         <img
