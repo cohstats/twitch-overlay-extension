@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./global.scss";
-import { events, firebaseInit } from "../firebase";
+import { /*events,*/ firebaseInit } from "../firebase";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
 import { Form, Input, Select, Typography } from "antd";
 import Text from "antd/lib/typography/Text";
@@ -28,7 +28,7 @@ const ConfigPage = () => {
 
   // listen to the data from firestore
   useEffect(() => {
-    events.init("overlay_settings");
+    //events.init("overlay_settings");
   }, []);
 
   useEffect(() => {

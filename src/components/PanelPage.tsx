@@ -3,7 +3,7 @@ import { useAuthentication } from "../util/TwitchHooks/useAuthentication";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useExtensionVisible } from "../util/TwitchHooks/useExtensionVisible";
 import "./global.scss";
-import { events, firebaseInit } from "../firebase";
+import { /*events,*/ firebaseInit } from "../firebase";
 
 declare global {
   interface Window {
@@ -23,7 +23,7 @@ const PanelPage = () => {
 
   // listen to the data from firestore
   useEffect(() => {
-    events.init("overlay");
+    //events.init("overlay");
 
     // This will be the ID which will the twitch streamer setup
     const id = "jjcD0QWTwzydSwYoxSkS";

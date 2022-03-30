@@ -6,7 +6,7 @@ import "./overlayModifications.scss";
 //import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 //import safeZones from "../../public/safezones.png";
 import { Button, Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
-import { events, firebaseInit } from "../firebase";
+import { /*events,*/ firebaseInit } from "../firebase";
 import TeamView from "./TeamView";
 import { GameData } from "../util/App/GameData";
 import Title from "antd/lib/typography/Title";
@@ -48,7 +48,7 @@ const VideoOverlayPage = () => {
 
   // listen to the data from firestore
   useEffect(() => {
-    events.init("overlay");
+    //events.init("overlay");
   }, []);
 
   useEffect(() => {

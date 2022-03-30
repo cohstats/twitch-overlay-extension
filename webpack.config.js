@@ -53,6 +53,7 @@ module.exports = (_env, argv) => {
       if (argv.mode === "production") {
         plugins.push(
           new HtmlWebpackPlugin({
+            title: "Coh2StatsOverlay_" + name,
             inject: true,
             chunks: [name],
             template: "./template.html",
