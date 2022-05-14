@@ -38,11 +38,16 @@ const ConfigPage = () => {
         setButtonPosition(config.buttonPosition);
         setFormInitialized(true);
       }
-      getDoc(doc(getFirestore(), "twitch-ext-public", config.uuid)).then((docSnap) => {
-        if (docSnap.exists()) {
-          setFoundData(true);
-        }
-      });
+      try {
+        getDoc(doc(getFirestore(), "twitch-ext-public", config.uuid)).then((docSnap) => {
+          if (docSnap.exists()) {
+            setFoundData(true);
+          }
+        });
+      } catch {
+        console.log("invalid uuid");
+        setFoundData(false);
+      }
     }
   }, [config, formInitialized]);
 

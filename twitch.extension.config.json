@@ -134,46 +134,72 @@
     "authorName": "COH Stats",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "https://localhost:8080/config.html",
+    "configUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
     "configurationLocation": "hosted",
-    "description": " ",
+    "description": " This extension displays an interactive overlay showing in game player stats for the game Company Of Heroes 2. We've created Coh2 Game Stats Desktop App https://coh2stats.com/desktop-app that enabled players to see stats for players in his current game. Now with this extension, these stats can be made available for viewers on stream too. Just enable this extension, connect it with the Coh2 Game Stats Desktop App and start streaming!\n\nThe extension creates an overlay over the stream. A button will be displayed when clicked, it will expand and show the player stats as well as a prediction for the win rates of the 2 teams. The player stats consist of solo ranking, solo level, team ranking, player alias with link to player card, player faction, player nationality, win streak and win ratio.",
     "eulaTosUrl": "",
     "hasChatSupport": false,
-    "iconUrl": "",
-    "iconUrls": {},
+    "iconUrl": "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/logoaac3fd6e-de41-4684-9070-9942b2e0b114",
+    "iconUrls": {
+      "100x100": "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/logoaac3fd6e-de41-4684-9070-9942b2e0b114",
+      "24x24": "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/taskbar649d58ee-644f-40bd-acd9-4d84f6fd32bf",
+      "300x200": "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/discovery832336fc-a95b-4662-9eca-ece9d30515f2"
+    },
     "id": "6x9q2nzzv9wewklo7gt7hz2vypdgg7",
     "installationCount": -42,
-    "liveConfigUrl": "",
-    "name": "Coh2StatsOverlay",
+    "liveConfigUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+    "name": "Coh2Stats Overlay",
     "panelHeight": 0,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
-    "screenshotUrls": [],
+    "screenshotUrls": [
+      "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshotda450053-d2af-40ca-ac35-381df5e13a64",
+      "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshot77e8b96a-fdd3-465c-8eb5-c35677b2fb26",
+      "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshot5db57da1-c111-4f43-bcd9-cf7881cb41de",
+      "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshot0504f38f-2185-4cc8-ac31-7efaa4588a6d",
+      "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshot8be2a74a-8e38-4bcf-b2cf-aa26b3613c82"
+    ],
     "sku": "",
-    "state": "Testing",
+    "state": "In Review",
     "subscriptionsSupportLevel": "none",
     "summary": "Displays an interactive overlay allowing viewers to see statistics of players within the currently streamed company of heroes 2 game",
-    "supportEmail": "",
+    "supportEmail": "info@coh2stats.com",
     "vendorCode": "",
-    "version": "0.0.1",
-    "viewerSummary": "",
+    "version": "0.0.2",
+    "viewerSummary": "Display an interactive overlay allowing you to see statistics of players within the currently streamed company of heroes 2 game",
     "viewerUrl": "",
     "viewerUrls": {
-      "videoOverlay": "https://localhost:8080/video_overlay.html"
+      "videoOverlay": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/video_overlay.html"
     },
     "views": {
       "videoOverlay": {
-        "viewerUrl": "https://localhost:8080/video_overlay.html",
+        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/video_overlay.html",
         "canLinkExternalContent": false
       },
       "config": {
-        "viewerUrl": "https://localhost:8080/config.html",
-        "canLinkExternalContent": false
+        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+        "canLinkExternalContent": true
+      },
+      "liveConfig": {
+        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+        "canLinkExternalContent": true
       }
     },
-    "whitelistedConfigUrls": [],
-    "whitelistedPanelUrls": []
+    "whitelistedConfigUrls": [
+      "https://firebaselogging-pa.googleapis.com",
+      " https://firestore.googleapis.com",
+      " https://firebase.googleapis.com",
+      " https://firebaseinstallations.googleapis.com",
+      " https://www.googletagmanager.com"
+    ],
+    "whitelistedPanelUrls": [
+      "https://firebaselogging-pa.googleapis.com",
+      " https://firestore.googleapis.com",
+      " https://firebase.googleapis.com",
+      " https://firebaseinstallations.googleapis.com",
+      " https://www.googletagmanager.com"
+    ]
   },
   "frontendCommand": "",
   "frontendFolderName": "dist",

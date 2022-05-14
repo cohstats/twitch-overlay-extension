@@ -8,7 +8,14 @@ _This allowlist cannot be edited after submitting your Extension for review. In 
 https://firebaselogging-pa.googleapis.com, https://firestore.googleapis.com, https://firebase.googleapis.com
 ```
 
+## Submission Channel
+https://www.twitch.tv/johannesmerkt
+
 ## Submission Text
+CHANGELOG 0.0.2:
+- changed extension images to use new logo
+- fixed incorrect input into settings window preventing the further use of settings window
+
 We are available for live review 11AM - 3PM PT
 
 We have created an app for the game Company of Heroes 2, that displays additional ranking information about players in the current played game. You can find out more on the app here: https://coh2stats.com/desktop-app
