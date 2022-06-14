@@ -6,7 +6,7 @@ export function useConfiguration(options?: {
   onChange?: (config: any) => void;
 }) {
   const { isModerator, isLoading } = useAuthentication();
-  const [config, setConfig] = useState<any>(undefined);
+  const [config, setConfig] = useState<any>(null);
   const [version, setVersion] = useState(
     !options || !options.defaultVersion ? "1.0" : options.defaultVersion,
   );
@@ -15,11 +15,11 @@ export function useConfiguration(options?: {
   const getConfig = () => {
     let config = window.Twitch.ext.configuration.broadcaster
       ? window.Twitch.ext.configuration.broadcaster.content
-      : undefined;
+      : null;
     try {
       config = JSON.parse(config);
     } catch (e) {
-      config = undefined;
+      config = null;
     }
     return config;
   };
@@ -31,12 +31,23 @@ export function useConfiguration(options?: {
   };
 
   useEffect(() => {
+    window.Twitch.ext.rig.log(`config changed: ${config}`);
+  }, [config])
+
+  useEffect(() => {
     if (window.Twitch && window.Twitch.ext) {
       window.Twitch.ext.configuration.onChanged(() => {
         updateVersion();
         const config = getConfig();
+
+        window.Twitch.ext.rig.log(`Configuration getting config: ${JSON.stringify(config)}`);
+        // State is async, we need to turn of loading only once it's popualted
+
         setConfig(config);
-        setIsLoadingConf(false);
+        setTimeout(() => {
+          setIsLoadingConf(false);
+        }, 1000);
+
         if (options && options.onChange) {
           options.onChange(config);
         }
@@ -45,11 +56,19 @@ export function useConfiguration(options?: {
     return undefined;
   }, [isModerator, isLoading, options]);
 
+  /**
+   * You can send only one param of the config it will update it.
+   * @param version
+   * @param config
+   */
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
       window.Twitch.ext.rig.log("Saving Config");
 
-      window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(config));
+      const currentConfig = getConfig();
+      const newConfig = { ...currentConfig, ...config };
+
+      window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(newConfig));
     }
   };
 

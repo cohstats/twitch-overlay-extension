@@ -9,10 +9,13 @@ https://firebaselogging-pa.googleapis.com, https://firestore.googleapis.com, htt
 ```
 
 ## Submission Channel
+
 https://www.twitch.tv/johannesmerkt
 
 ## Submission Text
+
 CHANGELOG 0.0.2:
+
 - changed extension images to use new logo
 - fixed incorrect input into settings window preventing the further use of settings window
 
@@ -22,7 +25,7 @@ We have created an app for the game Company of Heroes 2, that displays additiona
 
 We decided to create this overlay extension to make these stats available to viewers watching a streamer play a game of Company of Heroes 2. Viewers can expand the overlay to see information about players like ranking, faction, name ... as well as a prediction section which takes previous games that have been captured by us into account to create a prediction based on player ranking, team composition and map. The app will have to run in the background to update the stats on the twitch extension every time a new game starts.
 
-How it works: The streamer has to be using the COH2 Player Stats App and enable + configure the twitch extension settings inside the app.  Inside the app, the streamer will create a password protected API point on our server, where only his app will automatically upload the current stats from the game. The provided UUID for this API point can be copied from the app's settings and pasted into the twitch extension settings. With this UUID set, the extension can get request the stats from the API and display it to the viewers.
+How it works: The streamer has to be using the COH2 Player Stats App and enable + configure the twitch extension settings inside the app. Inside the app, the streamer will create a password protected API point on our server, where only his app will automatically upload the current stats from the game. The provided UUID for this API point can be copied from the app's settings and pasted into the twitch extension settings. With this UUID set, the extension can get request the stats from the API and display it to the viewers.
 
 We are using the libraries react, firebase, antd, @mantine/hooks and @ant-design/icons
 The source code for this build can be found here: https://github.com/cohstats/twitch-overlay-extension

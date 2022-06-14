@@ -14,6 +14,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import GameBalanceView from "./gameBalanceView";
 import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
 import { useViewportSize } from "@mantine/hooks";
+import { ShowStatsButton } from "./show-stats-button";
 
 declare global {
   interface Window {
@@ -22,10 +23,6 @@ declare global {
     };
   }
 }
-
-// We need to initialize our Firebase
-// This has to happen once on the main file of each render process
-firebaseInit();
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const VideoOverlayPage = () => {
@@ -36,6 +33,13 @@ const VideoOverlayPage = () => {
   const [tab, setTap] = useState(0);
   const { config } = useConfiguration();
   const [buttonPosition, setButtonPosition] = useState("minimap");
+  const showStatsButtonText = config?.showStatsButtonText || "Show Player Stats";
+  const showStatsButtonSize = config?.showStatsButtonSize || "middle";
+  const showStatsButtonColor = config?.showStatsButtonColor || "#3A91FF";
+  const showStatsButtonTextColor = config?.showStatsButtonTextColor || "#F7FBFF";
+  const showStatsButtonShape = config?.showStatsButtonShape || "";
+
+  window.Twitch.ext.rig.log(`Config data are: ${JSON.stringify(config)}`);
 
   const showDrawer = () => {
     setDrawerVisible(true);
@@ -89,28 +93,45 @@ const VideoOverlayPage = () => {
       <>
         {!drawerVisible || twitchPlayerTooSmall ? (
           <>
-            <Button
-              style={{
-                position: "absolute",
-                bottom: bottomButtonPosition,
-                left: leftButtonPosition,
-              }}
-              type={twitchPlayerTooSmall ? "dashed" : "primary"}
-              danger={twitchPlayerTooSmall}
-              onClick={showDrawer}
-            >
-              {twitchPlayerTooSmall ? (
-                <>
-                  <Tooltip
-                    overlay={"Cannot display stats because the twitch player view is too small"}
-                  >
-                    Show Player Stats
-                  </Tooltip>
-                </>
-              ) : (
-                <>Show Player Stats</>
-              )}
-            </Button>
+            <ShowStatsButton
+              bottomButtonPosition={bottomButtonPosition}
+              leftButtonPosition={leftButtonPosition}
+              showStatsButtonColor={showStatsButtonColor}
+              showStatsButtonTextColor={showStatsButtonTextColor}
+              showStatsButtonShape={showStatsButtonShape}
+              showStatsButtonSize={showStatsButtonSize}
+              twitchPlayerTooSmall={twitchPlayerTooSmall}
+              showDrawer={showDrawer}
+              showStatsButtonText={showStatsButtonText}
+            />
+
+            {/*<Button*/}
+            {/*  style={{*/}
+            {/*    position: "absolute",*/}
+            {/*    bottom: bottomButtonPosition,*/}
+            {/*    left: leftButtonPosition,*/}
+            {/*    background: showStatsButtonColor,*/}
+            {/*    borderColor: showStatsButtonColor,*/}
+            {/*    color: showStatsButtonTextColor,*/}
+            {/*  }}*/}
+            {/*  shape={showStatsButtonShape}*/}
+            {/*  size={showStatsButtonSize}*/}
+            {/*  type={twitchPlayerTooSmall ? "dashed" : "primary"}*/}
+            {/*  danger={twitchPlayerTooSmall}*/}
+            {/*  onClick={showDrawer}*/}
+            {/*>*/}
+            {/*  {twitchPlayerTooSmall ? (*/}
+            {/*    <>*/}
+            {/*      <Tooltip*/}
+            {/*        overlay={"Cannot display stats because the twitch player view is too small"}*/}
+            {/*      >*/}
+            {/*        Show Player Stats*/}
+            {/*      </Tooltip>*/}
+            {/*    </>*/}
+            {/*  ) : (*/}
+            {/*    <>{showStatsButtonText}</>*/}
+            {/*  )}*/}
+            {/*</Button>*/}
           </>
         ) : null}
         <Drawer
@@ -189,7 +210,7 @@ const VideoOverlayPage = () => {
       </>
     );
   } else {
-    return <div className="App"></div>;
+    return <div className="App" />;
   }
 };
 

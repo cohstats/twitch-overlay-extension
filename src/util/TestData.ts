@@ -4,6 +4,7 @@ import { GameData } from "./App/GameData";
 
 export const testData: GameData = {
   found: true,
+  uniqueId: "adfasdfas",
   state: "closed",
   type: "ai",
   map: "8p_nordwind\r",

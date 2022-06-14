@@ -126,6 +126,50 @@
       "orientation": "Portrait",
       "type": "video_overlay",
       "viewerType": "Logged-Out Viewer"
+    },
+    {
+      "channelId": "160135857",
+      "configurationAnchor": "video_overlay",
+      "displayChannelName": "pagep535",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "6",
+      "isPopout": false,
+      "label": "Normal User",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "video_overlay",
+      "viewerType": "Logged-Out Viewer"
+    },
+    {
+      "channelId": "160135857",
+      "configurationAnchor": "video_overlay",
+      "displayChannelName": "pagep535",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "7",
+      "isPopout": false,
+      "label": "Config - Current User",
+      "linked": true,
+      "linkedUserId": "265737932",
+      "orientation": "Portrait",
+      "type": "config",
+      "viewerType": "Broadcaster"
     }
   ],
   "manifest": {
@@ -134,7 +178,7 @@
     "authorName": "COH Stats",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+    "configUrl": "https://localhost:8080/config.html",
     "configurationLocation": "hosted",
     "description": " This extension displays an interactive overlay showing in game player stats for the game Company Of Heroes 2. We've created Coh2 Game Stats Desktop App https://coh2stats.com/desktop-app that enabled players to see stats for players in his current game. Now with this extension, these stats can be made available for viewers on stream too. Just enable this extension, connect it with the Coh2 Game Stats Desktop App and start streaming!\n\nThe extension creates an overlay over the stream. A button will be displayed when clicked, it will expand and show the player stats as well as a prediction for the win rates of the 2 teams. The player stats consist of solo ranking, solo level, team ranking, player alias with link to player card, player faction, player nationality, win streak and win ratio.",
     "eulaTosUrl": "",
@@ -147,7 +191,7 @@
     },
     "id": "6x9q2nzzv9wewklo7gt7hz2vypdgg7",
     "installationCount": -42,
-    "liveConfigUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+    "liveConfigUrl": "https://localhost:8080/config.html",
     "name": "Coh2Stats Overlay",
     "panelHeight": 0,
     "privacyPolicyUrl": "",
@@ -161,28 +205,28 @@
       "https://extensions-discovery-images.twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.1/screenshot8be2a74a-8e38-4bcf-b2cf-aa26b3613c82"
     ],
     "sku": "",
-    "state": "In Review",
+    "state": "Testing",
     "subscriptionsSupportLevel": "none",
     "summary": "Displays an interactive overlay allowing viewers to see statistics of players within the currently streamed company of heroes 2 game",
     "supportEmail": "info@coh2stats.com",
     "vendorCode": "",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "viewerSummary": "Display an interactive overlay allowing you to see statistics of players within the currently streamed company of heroes 2 game",
     "viewerUrl": "",
     "viewerUrls": {
-      "videoOverlay": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/video_overlay.html"
+      "videoOverlay": "https://localhost:8080/video_overlay.html"
     },
     "views": {
       "videoOverlay": {
-        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/video_overlay.html",
+        "viewerUrl": "https://localhost:8080/video_overlay.html",
         "canLinkExternalContent": false
       },
       "config": {
-        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+        "viewerUrl": "https://localhost:8080/config.html",
         "canLinkExternalContent": true
       },
       "liveConfig": {
-        "viewerUrl": "https://6x9q2nzzv9wewklo7gt7hz2vypdgg7.ext-twitch.tv/6x9q2nzzv9wewklo7gt7hz2vypdgg7/0.0.2/d9557c46a36ae0a805306666cf471ade/config.html",
+        "viewerUrl": "https://localhost:8080/config.html",
         "canLinkExternalContent": true
       }
     },
