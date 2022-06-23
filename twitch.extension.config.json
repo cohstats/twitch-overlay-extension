@@ -18,116 +18,6 @@
   ],
   "extensionViews": [
     {
-      "channelId": "775994822",
-      "configurationAnchor": "video_overlay",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "1",
-      "isPopout": false,
-      "label": "ViewerOverlay",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "video_overlay",
-      "viewerType": "Logged-Out Viewer"
-    },
-    {
-      "channelId": "775994822",
-      "configurationAnchor": "video_overlay",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "2",
-      "isPopout": false,
-      "label": "OverlayConfig",
-      "linked": true,
-      "linkedUserId": "265737932",
-      "orientation": "Portrait",
-      "type": "config",
-      "viewerType": "Broadcaster"
-    },
-    {
-      "channelId": "775994822",
-      "configurationAnchor": "video_overlay",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 852,
-        "height": 480
-      },
-      "id": "3",
-      "isPopout": false,
-      "label": "Small view",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "video_overlay",
-      "viewerType": "Logged-Out Viewer"
-    },
-    {
-      "channelId": "775994822",
-      "configurationAnchor": "video_overlay",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 650,
-        "height": 1000
-      },
-      "id": "4",
-      "isPopout": false,
-      "label": "Too small x",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "video_overlay",
-      "viewerType": "Logged-Out Viewer"
-    },
-    {
-      "channelId": "775994822",
-      "configurationAnchor": "video_overlay",
-      "displayChannelName": "johannesmerkt",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1000,
-        "height": 370
-      },
-      "id": "5",
-      "isPopout": false,
-      "label": "too small y",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "video_overlay",
-      "viewerType": "Logged-Out Viewer"
-    },
-    {
       "channelId": "160135857",
       "configurationAnchor": "video_overlay",
       "displayChannelName": "pagep535",
@@ -170,6 +60,28 @@
       "orientation": "Portrait",
       "type": "config",
       "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "160135857",
+      "configurationAnchor": "video_overlay",
+      "displayChannelName": "pagep535",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "8",
+      "isPopout": false,
+      "label": "Classic Overlay - Current User",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "video_overlay",
+      "viewerType": "Logged-In Viewer"
     }
   ],
   "manifest": {

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuthentication } from "./useAuthentication";
 
+/**
+ * This useEffect is using internal state. It can be called only 1 in the application - otherwise it
+ * won't be working properly.
+ * @param options
+ */
 export function useConfiguration(options?: {
   defaultVersion?: string;
   onChange?: (config: any) => void;
@@ -63,12 +68,16 @@ export function useConfiguration(options?: {
    */
   const setConfigExternal = (version: string, config: any) => {
     if (!isLoading && isModerator) {
-      window.Twitch.ext.rig.log("Saving Config");
+      window.Twitch.ext.rig.log("Saving new Config");
 
       const currentConfig = getConfig();
       const newConfig = { ...currentConfig, ...config };
 
+      window.Twitch.ext.rig.log("Saving new Config", newConfig);
+
       window.Twitch.ext.configuration.set("broadcaster", version, JSON.stringify(newConfig));
+
+      return true;
     }
   };
 

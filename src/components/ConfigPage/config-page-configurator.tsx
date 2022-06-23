@@ -1,35 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "../global.scss";
-//import { /*events,*/ firebaseInit } from "../firebase";
-import { useConfiguration } from "../../util/TwitchHooks/useConfiguration";
-import { Form, Input, Select, Typography, Divider, Col, Row, InputNumber } from "antd";
-import { debounce } from "../../util/utils";
+import {Form, Input, Select, Typography, Divider, Col, Row, InputNumber, notification, Button} from "antd";
 import { ShowStatsButton } from "../show-stats-button";
 
 const { Text, Title } = Typography;
 
-declare global {
-  interface Window {
-    Twitch?: {
-      ext: any;
-    };
-  }
+
+const openNotificationWithIcon = (message: string) => {
+  notification.success({
+    message: message,
+  });
+};
+
+interface IProps {
+  config: Record<string, any>;
+  version: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  setConfig: Function;
 }
 
-// We need to initialize our Firebase
-// This has to happen once on the main file of each render process
-//firebaseInit();
+const ConfigPageConfigurator: React.FC<IProps> = ({config,setConfig,version}) => {
 
-const ConfigPageConfigurator = () => {
-  const { config, version, setConfig } = useConfiguration(); // <- use this hook to set and get the configuration
   const [uuid, setUUID] = useState(config?.uuid);
-  const [buttonPosition, setButtonPosition] = useState("minimap");
+  const [buttonPosition, setButtonPosition] = useState(config?.buttonPosition || "minimap");
   const [validUUID, setValidUUID] = useState(false);
 
   const [showStatsButtonText, setShowStatsButtonText] = useState(
-    config?.buttonPosition || "Show Player Stats",
+    config?.showStatsButtonText || "Show Player Stats",
   );
+  const [isButtonTextSaved, setIsButtonTextSaved ] = useState(true);
+
   const [showStatsButtonSize, setShowStatsButtonSize] = useState(
     config?.showStatsButtonSize || "middle",
   );
@@ -99,24 +100,40 @@ const ConfigPageConfigurator = () => {
     setShowStatsButtonPositionLeft(leftButtonPosition);
     setShowStatsButtonPositionBottom(bottomButtonPosition);
 
-    setConfig(version, { buttonPosition: value, leftButtonPosition, bottomButtonPosition });
+    if(setConfig(version, { buttonPosition: value, leftButtonPosition, bottomButtonPosition })){
+      openNotificationWithIcon("Button position updated");
+    }
+
     setButtonPosition(value);
   };
 
   const handleButtonSizeChange = (value: string) => {
-    setConfig(version, { showStatsButtonSize: value });
-    setShowStatsButtonSize(value);
+    if(setConfig(version, { showStatsButtonSize: value })){
+      setShowStatsButtonSize(value);
+      openNotificationWithIcon("Button size updated")
+    }
+
   };
 
   const handleButtonShapeChange = (value: string) => {
-    setConfig(version, { showStatsButtonShape: value });
-    setShowStatsButtonShape(value);
+    if(setConfig(version, { showStatsButtonShape: value })){
+      openNotificationWithIcon("Button shape updated")
+      setShowStatsButtonShape(value);
+    }
+
   };
 
   const handleButtonTextChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setConfig(version, { showStatsButtonText: event.target.value });
     setShowStatsButtonText(event.target.value);
+    setIsButtonTextSaved(false);
   };
+
+  const saveButtonText = () => {
+    if(setConfig(version, { showStatsButtonText: showStatsButtonText })){
+      openNotificationWithIcon("Button text updated")
+      setIsButtonTextSaved(true);
+    }
+  }
 
   const handleButtonColorChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setConfig(version, { showStatsButtonColor: event.target.value });
@@ -129,13 +146,19 @@ const ConfigPageConfigurator = () => {
   };
 
   const handleButtonPositionFromLeftChange = (value: number) => {
-    setConfig(version, { leftButtonPosition: value });
-    setShowStatsButtonPositionLeft(value);
+    if(setConfig(version, { leftButtonPosition: value })){
+      setShowStatsButtonPositionLeft(value);
+      openNotificationWithIcon("Button location from left updated")
+    }
+
   };
 
   const handleButtonPositionFromRightChange = (value: number) => {
-    setConfig(version, { bottomButtonPosition: value });
-    setShowStatsButtonPositionBottom(value);
+    if(setConfig(version, { bottomButtonPosition: value })){
+      setShowStatsButtonPositionBottom(value);
+      openNotificationWithIcon("Button location from left bottom updated")
+    }
+
   };
 
   window.Twitch.ext.rig.log(`Config data are: ${JSON.stringify(config)}`);
@@ -160,7 +183,7 @@ const ConfigPageConfigurator = () => {
             status={validUUID ? "" : "warning"}
             onChange={handleUUIDChange}
           />
-          {validUUID ? <Text type="success">Found data!</Text> : null}
+          {validUUID ? <Text type="success">UUID is valid!</Text> : null}
         </Form.Item>
       </Form>
       <Divider orientation="left">Show Stats Button settings:</Divider>
@@ -204,13 +227,17 @@ const ConfigPageConfigurator = () => {
               />
             </Form.Item>
             <Form.Item label="Button Text">
-              <Input
-                status={showStatsButtonText?.length > 0 ? "" : "warning"}
-                placeholder="Set button text."
-                value={showStatsButtonText}
-                onChange={handleButtonTextChange}
-                maxLength={60}
-              />
+              <div style={{display: "inline-block"}}>
+                <Input
+                  status={isButtonTextSaved ? "" : "warning"}
+                  placeholder="Set button text."
+                  value={showStatsButtonText}
+                  onChange={handleButtonTextChange}
+                  maxLength={60}
+                  style={{width: "55%"}}
+                />
+                <Button type={"primary"} onClick={saveButtonText} style={{marginLeft: 5, width: "35%"}}>Save</Button>
+              </div>
             </Form.Item>
             <Form.Item label="Button Size">
               <Select
@@ -271,31 +298,3 @@ const ConfigPageConfigurator = () => {
 };
 
 export default ConfigPageConfigurator;
-
-/*
-          <Form.Item label="Link to your player card">
-            <Search placeholder="Search player name" enterButton />
-          </Form.Item>
-*/
-/*
-          <Form.Item label="Developer Option Coh2 game state">
-            <Radio.Group>
-              <Radio.Button value="optional">closed</Radio.Button>
-              <Radio.Button value>menu</Radio.Button>
-              <Radio.Button value={false}>loading</Radio.Button>
-              <Radio.Button value={false}>ingame</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-*/
-
-/*
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={() => setConfig(version, { gameState: "closed" })}
-            >
-              Save
-            </Button>
-          </Form.Item>
-*/

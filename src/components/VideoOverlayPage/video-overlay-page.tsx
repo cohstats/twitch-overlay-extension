@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { useExtensionVisible } from "../util/TwitchHooks/useExtensionVisible";
-import "./global.scss";
-import "./overlayModifications.scss";
+import { useExtensionVisible } from "../../util/TwitchHooks/useExtensionVisible";
+import "../global.scss";
+import "../overlayModifications.scss";
 //import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 //import safeZones from "../../public/safezones.png";
-import { Button, Col, Drawer, Radio, RadioChangeEvent, Row, Spin, Tooltip } from "antd";
-import { /*events,*/ firebaseInit } from "../firebase";
-import TeamView from "./TeamView";
-import { GameData } from "../util/App/GameData";
+import {  Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
+import { /*events,*/ firebaseInit } from "../../firebase";
+import TeamView from "../TeamView";
+import { GameData } from "../../util/App/GameData";
 import Title from "antd/lib/typography/Title";
 import { LoadingOutlined } from "@ant-design/icons";
-import GameBalanceView from "./gameBalanceView";
-import { useConfiguration } from "../util/TwitchHooks/useConfiguration";
+import GameBalanceView from "../gameBalanceView";
+import { useConfiguration } from "../../util/TwitchHooks/useConfiguration";
 import { useViewportSize } from "@mantine/hooks";
-import { ShowStatsButton } from "./show-stats-button";
+import { ShowStatsButton } from "../show-stats-button";
 
-declare global {
-  interface Window {
-    Twitch?: {
-      ext: any;
-    };
-  }
-}
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const VideoOverlayPage = () => {
@@ -38,6 +31,8 @@ const VideoOverlayPage = () => {
   const showStatsButtonColor = config?.showStatsButtonColor || "#3A91FF";
   const showStatsButtonTextColor = config?.showStatsButtonTextColor || "#F7FBFF";
   const showStatsButtonShape = config?.showStatsButtonShape || "";
+  const showStatsButtonPositionLeft = config?.showStatsButtonPositionLeft;
+  const showStatsButtonPositionBottom = config?.showStatsButtonPositionBottom;
 
   window.Twitch.ext.rig.log(`Config data are: ${JSON.stringify(config)}`);
 
@@ -65,6 +60,7 @@ const VideoOverlayPage = () => {
     }
   }, [config]);
 
+  // Legacy options - left to be able to migrate
   let leftButtonPosition = "83%";
   let bottomButtonPosition = "18%";
   if (buttonPosition === "minimap") {
@@ -82,6 +78,12 @@ const VideoOverlayPage = () => {
   if (buttonPosition === "overgrid") {
     leftButtonPosition = "83%";
     bottomButtonPosition = "29%";
+  }
+
+  // Check if we have new values in the config saved
+  if (showStatsButtonPositionLeft && showStatsButtonPositionBottom){
+    leftButtonPosition = showStatsButtonPositionLeft;
+    bottomButtonPosition = showStatsButtonPositionBottom;
   }
 
   // if the stream is watched on a tiny view the overlay cannot be displayed properly anymore
@@ -104,34 +106,6 @@ const VideoOverlayPage = () => {
               showDrawer={showDrawer}
               showStatsButtonText={showStatsButtonText}
             />
-
-            {/*<Button*/}
-            {/*  style={{*/}
-            {/*    position: "absolute",*/}
-            {/*    bottom: bottomButtonPosition,*/}
-            {/*    left: leftButtonPosition,*/}
-            {/*    background: showStatsButtonColor,*/}
-            {/*    borderColor: showStatsButtonColor,*/}
-            {/*    color: showStatsButtonTextColor,*/}
-            {/*  }}*/}
-            {/*  shape={showStatsButtonShape}*/}
-            {/*  size={showStatsButtonSize}*/}
-            {/*  type={twitchPlayerTooSmall ? "dashed" : "primary"}*/}
-            {/*  danger={twitchPlayerTooSmall}*/}
-            {/*  onClick={showDrawer}*/}
-            {/*>*/}
-            {/*  {twitchPlayerTooSmall ? (*/}
-            {/*    <>*/}
-            {/*      <Tooltip*/}
-            {/*        overlay={"Cannot display stats because the twitch player view is too small"}*/}
-            {/*      >*/}
-            {/*        Show Player Stats*/}
-            {/*      </Tooltip>*/}
-            {/*    </>*/}
-            {/*  ) : (*/}
-            {/*    <>{showStatsButtonText}</>*/}
-            {/*  )}*/}
-            {/*</Button>*/}
           </>
         ) : null}
         <Drawer

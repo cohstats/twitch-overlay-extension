@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import VideoOverlayPage from "./components/VideoOverlayPage";
+import VideoOverlayPage from "./components/VideoOverlayPage/video-overlay-page";
 import {firebaseInit} from "./firebase";
 
 // We need to initialize our Firebase
