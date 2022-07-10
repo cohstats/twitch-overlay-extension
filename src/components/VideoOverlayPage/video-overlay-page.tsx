@@ -5,7 +5,7 @@ import "../global.scss";
 import "../overlayModifications.scss";
 //import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 //import safeZones from "../../public/safezones.png";
-import {  Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
+import { Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
 import { /*events,*/ firebaseInit } from "../../firebase";
 import TeamView from "../TeamView";
 import { GameData } from "../../util/App/GameData";
@@ -15,7 +15,6 @@ import GameBalanceView from "../gameBalanceView";
 import { useConfiguration } from "../../util/TwitchHooks/useConfiguration";
 import { useViewportSize } from "@mantine/hooks";
 import { ShowStatsButton } from "../show-stats-button";
-
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const VideoOverlayPage = () => {
@@ -31,8 +30,10 @@ const VideoOverlayPage = () => {
   const showStatsButtonColor = config?.showStatsButtonColor || "#3A91FF";
   const showStatsButtonTextColor = config?.showStatsButtonTextColor || "#F7FBFF";
   const showStatsButtonShape = config?.showStatsButtonShape || "";
-  const showStatsButtonPositionLeft = config?.showStatsButtonPositionLeft;
-  const showStatsButtonPositionBottom = config?.showStatsButtonPositionBottom;
+  const showStatsButtonPositionLeft = config?.leftButtonPosition;
+  const showStatsButtonPositionBottom = config?.bottomButtonPosition;
+  const showStatsButtonOnlyCOH2 = config?.showStatsButtonOnlyCOH2 || true;
+  const [displayButtonBasedOnGame, setDisplayButtonBasedOnGame] = useState(true);
 
   window.Twitch.ext.rig.log(`Config data are: ${JSON.stringify(config)}`);
 
@@ -47,6 +48,21 @@ const VideoOverlayPage = () => {
   const handleTabChange = (event: RadioChangeEvent) => {
     setTap(event.target.value);
   };
+
+  // Register context callback
+  useEffect(() => {
+    //https://dev.twitch.tv/docs/extensions/reference
+    window.Twitch.ext.onContext((context: Record<string, any>) => {
+      if (
+        context &&
+        context.game &&
+        showStatsButtonOnlyCOH2 &&
+        context.game !== "Company of Heroes 2"
+      ) {
+        setDisplayButtonBasedOnGame(false);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (config && config.uuid) {
@@ -81,19 +97,22 @@ const VideoOverlayPage = () => {
   }
 
   // Check if we have new values in the config saved
-  if (showStatsButtonPositionLeft && showStatsButtonPositionBottom){
-    leftButtonPosition = showStatsButtonPositionLeft;
-    bottomButtonPosition = showStatsButtonPositionBottom;
+  if (showStatsButtonPositionLeft && showStatsButtonPositionBottom) {
+    leftButtonPosition = `${showStatsButtonPositionLeft}%`;
+    bottomButtonPosition = `${showStatsButtonPositionBottom}%`;
   }
+
+  // window.Twitch.ext.rig.log(`Position are:`, leftButtonPosition, bottomButtonPosition);
 
   // if the stream is watched on a tiny view the overlay cannot be displayed properly anymore
   const twitchPlayerTooSmall = width < 700 || height < 380;
 
-  if (extensionVisible) {
+  // gameData means that we have data from the game
+  if (extensionVisible && gameData) {
     // !isLoading && extensionVisible
     return (
       <>
-        {!drawerVisible || twitchPlayerTooSmall ? (
+        {(!drawerVisible || twitchPlayerTooSmall) && displayButtonBasedOnGame ? (
           <>
             <ShowStatsButton
               bottomButtonPosition={bottomButtonPosition}

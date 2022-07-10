@@ -31,12 +31,12 @@ We are using the libraries react, firebase, antd, @mantine/hooks and @ant-design
 The source code for this build can be found here: https://github.com/cohstats/twitch-overlay-extension
 
 ## Development
+
 1. Open in the Twitch Rig
 2. Run yarn host
 
 Be careful that views can be user specific - check twitch.extension.config.json
 and be sure the views are configured for your account.
-
 
 # DEFAULT INFO
 

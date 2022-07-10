@@ -4,6 +4,8 @@ import { useAuthentication } from "./useAuthentication";
 /**
  * This useEffect is using internal state. It can be called only 1 in the application - otherwise it
  * won't be working properly.
+ *
+ * You can call setConfig only 1 in the application. You need to do full reload after that cos of Twitch.
  * @param options
  */
 export function useConfiguration(options?: {
@@ -37,7 +39,7 @@ export function useConfiguration(options?: {
 
   useEffect(() => {
     window.Twitch.ext.rig.log(`config changed: ${config}`);
-  }, [config])
+  }, [config]);
 
   useEffect(() => {
     if (window.Twitch && window.Twitch.ext) {
@@ -49,9 +51,7 @@ export function useConfiguration(options?: {
         // State is async, we need to turn of loading only once it's popualted
 
         setConfig(config);
-        setTimeout(() => {
-          setIsLoadingConf(false);
-        }, 1000);
+        setIsLoadingConf(false);
 
         if (options && options.onChange) {
           options.onChange(config);
