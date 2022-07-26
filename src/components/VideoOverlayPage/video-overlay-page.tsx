@@ -53,13 +53,8 @@ const VideoOverlayPage = () => {
   useEffect(() => {
     //https://dev.twitch.tv/docs/extensions/reference
     window.Twitch.ext.onContext((context: Record<string, any>) => {
-      const showButton = showStatsButtonOnlyCOH2 !== false
-      if (
-        context &&
-        context.game &&
-        showButton &&
-        context.game !== "Company of Heroes 2"
-      ) {
+      const showButton = showStatsButtonOnlyCOH2 !== false;
+      if (context && context.game && showButton && context.game !== "Company of Heroes 2") {
         setDisplayButtonBasedOnGame(false);
       }
     });

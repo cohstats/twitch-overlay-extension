@@ -1,34 +1,6 @@
 # COH 2 Stats Twitch Extension
 
-### List of whitelisted domains:
-
-_This allowlist cannot be edited after submitting your Extension for review. In addition to this, if you intend to edit your allowlist, you must resubmit your Extension for review. Please make sure that your allowlist is accurate prior to submitting for review. For more information, please refer to our documentation._
-
-```
-https://firebaselogging-pa.googleapis.com, https://firestore.googleapis.com, https://firebase.googleapis.com
-```
-
-## Submission Channel
-
-https://www.twitch.tv/johannesmerkt
-
-## Submission Text
-
-CHANGELOG 0.0.2:
-
-- changed extension images to use new logo
-- fixed incorrect input into settings window preventing the further use of settings window
-
-We are available for live review 11AM - 3PM PT
-
-We have created an app for the game Company of Heroes 2, that displays additional ranking information about players in the current played game. You can find out more on the app here: https://coh2stats.com/desktop-app
-
-We decided to create this overlay extension to make these stats available to viewers watching a streamer play a game of Company of Heroes 2. Viewers can expand the overlay to see information about players like ranking, faction, name ... as well as a prediction section which takes previous games that have been captured by us into account to create a prediction based on player ranking, team composition and map. The app will have to run in the background to update the stats on the twitch extension every time a new game starts.
-
-How it works: The streamer has to be using the COH2 Player Stats App and enable + configure the twitch extension settings inside the app. Inside the app, the streamer will create a password protected API point on our server, where only his app will automatically upload the current stats from the game. The provided UUID for this API point can be copied from the app's settings and pasted into the twitch extension settings. With this UUID set, the extension can get request the stats from the API and display it to the viewers.
-
-We are using the libraries react, firebase, antd, @mantine/hooks and @ant-design/icons
-The source code for this build can be found here: https://github.com/cohstats/twitch-overlay-extension
+Install at https://dashboard.twitch.tv/extensions/6x9q2nzzv9wewklo7gt7hz2vypdgg7 together with COH2 Desktop app https://coh2stats.com/desktop-app
 
 ## Development
 
@@ -37,6 +9,14 @@ The source code for this build can be found here: https://github.com/cohstats/tw
 
 Be careful that views can be user specific - check twitch.extension.config.json
 and be sure the views are configured for your account.
+
+### List of whitelisted domains:
+
+_This allowlist cannot be edited after submitting your Extension for review. In addition to this, if you intend to edit your allowlist, you must resubmit your Extension for review. Please make sure that your allowlist is accurate prior to submitting for review. For more information, please refer to our documentation._
+
+```
+https://firebaselogging-pa.googleapis.com, https://firestore.googleapis.com, https://firebase.googleapis.com
+```
 
 # DEFAULT INFO
 
