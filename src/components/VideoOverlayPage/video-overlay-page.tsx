@@ -6,7 +6,7 @@ import "../overlayModifications.scss";
 //import inGameScreenShot from "../../public/ingameScreenshot.jpg";
 //import safeZones from "../../public/safezones.png";
 import { Col, Drawer, Radio, RadioChangeEvent, Row, Spin } from "antd";
-import { /*events,*/ firebaseInit } from "../../firebase";
+// import { /*events,*/ firebaseInit } from "../../firebase";
 import TeamView from "../TeamView";
 import { GameData } from "../../util/App/GameData";
 import Title from "antd/lib/typography/Title";
@@ -32,7 +32,7 @@ const VideoOverlayPage = () => {
   const showStatsButtonShape = config?.showStatsButtonShape || "";
   const showStatsButtonPositionLeft = config?.leftButtonPosition;
   const showStatsButtonPositionBottom = config?.bottomButtonPosition;
-  const showStatsButtonOnlyCOH2 = config?.showStatsButtonOnlyCOH2 || true;
+  const showStatsButtonOnlyCOH2 = config?.showStatsButtonOnlyCOH2;
   const [displayButtonBasedOnGame, setDisplayButtonBasedOnGame] = useState(true);
 
   window.Twitch.ext.rig.log(`Config data are: ${JSON.stringify(config)}`);
@@ -53,10 +53,11 @@ const VideoOverlayPage = () => {
   useEffect(() => {
     //https://dev.twitch.tv/docs/extensions/reference
     window.Twitch.ext.onContext((context: Record<string, any>) => {
+      const showButton = showStatsButtonOnlyCOH2 !== false
       if (
         context &&
         context.game &&
-        showStatsButtonOnlyCOH2 &&
+        showButton &&
         context.game !== "Company of Heroes 2"
       ) {
         setDisplayButtonBasedOnGame(false);

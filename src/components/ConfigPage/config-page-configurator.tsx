@@ -48,6 +48,7 @@ const ConfigPageConfigurator: React.FC<IProps> = ({ globalConfig, setGlobalConfi
         : "#F7FBFF",
       leftButtonPosition: config?.leftButtonPosition ? config?.leftButtonPosition : 2,
       bottomButtonPosition: config?.bottomButtonPosition ? config?.bottomButtonPosition : 34,
+      showStatsButtonOnlyCOH2: config?.showStatsButtonOnlyCOH2 === false ? config?.showStatsButtonOnlyCOH2 : true
     };
 
     setConfig((prevState) => {
@@ -353,7 +354,7 @@ const ConfigPageConfigurator: React.FC<IProps> = ({ globalConfig, setGlobalConfi
                 </>
               }
             >
-              <Switch defaultChecked onChange={handleShowOnlyWhenPlayingCOH2} />
+              <Switch checked={config?.showStatsButtonOnlyCOH2} onChange={handleShowOnlyWhenPlayingCOH2} />
             </Form.Item>
           </Form>
         </Col>
