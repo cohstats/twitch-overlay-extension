@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ConfigPage from "./components/ConfigPage";
 import { firebaseInit /*, events*/ } from "./firebase";
-//import "./analytics2";
+import ConfigPage from "./components/ConfigPage/config-page";
 
 // We need to initialize our Firebase
 // This has to happen once on the main file of each render process

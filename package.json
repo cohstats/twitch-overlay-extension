@@ -54,6 +54,7 @@
     "style-loader": "^0.21.0",
     "typescript": "^4.6.2",
     "webpack": "^4.41.3",
+    "npm-run-all": "^4.1.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
@@ -65,9 +66,9 @@
     "firebase": "^9.6.8",
     "javascript-time-ago": "^2.3.13",
     "jsonwebtoken": "^8.5.1",
-    "react": "^16.12.0",
+    "react": "^17.0.2",
     "react-country-flag": "^3.0.2",
-    "react-dom": "^16.12.0"
+    "react-dom": "^17.0.2"
   },
   "babel": {
     "presets": [
